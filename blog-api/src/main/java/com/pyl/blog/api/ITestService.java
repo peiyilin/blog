@@ -2,7 +2,7 @@ package com.pyl.blog.api;
 
 /**
  * TODO dubbo test interface
- * @author peiyilin-ds
+ * @author peiyilin
  * @date 2018-07-27 17:04
  */
 public interface ITestService {

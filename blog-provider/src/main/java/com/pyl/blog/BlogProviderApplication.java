@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
  * TODO init application
- * @author peiyilin-ds
+ * @author peiyilin
  * @date 2018/7/27 17:18
  **/
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})

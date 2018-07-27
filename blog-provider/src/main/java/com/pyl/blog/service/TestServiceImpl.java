@@ -6,7 +6,7 @@ import com.pyl.blog.api.ITestService;
 /**
  * TODO dubbo test impl class
  *
- * @author peiyilin-ds
+ * @author peiyilin
  * @date 2018/7/27 17:14
  **/
 @Service(version = "1.0.0")
