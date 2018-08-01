@@ -1,7 +1,6 @@
 package com.pyl.blog.service;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.pyl.blog.api.ITestService;
 
 /**
  * TODO dubbo test impl class

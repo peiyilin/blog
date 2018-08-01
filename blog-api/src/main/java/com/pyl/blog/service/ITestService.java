@@ -1,4 +1,4 @@
-package com.pyl.blog.api;
+package com.pyl.blog.service;
 
 /**
  * TODO dubbo test interface
