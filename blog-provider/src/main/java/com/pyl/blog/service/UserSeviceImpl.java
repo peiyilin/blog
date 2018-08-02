@@ -20,6 +20,9 @@ public class UserSeviceImpl implements IUserService {
 
     @Override
     public List<User> getAll(int pageIndex,int pageSize) {
+        if (pageSize < 0 || pageSize==0){
+            pageSize = 10;
+        }
         PageHelper.startPage(pageIndex, pageSize);
         return userMapper.selectAll();
     }
