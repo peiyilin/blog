@@ -12,6 +12,7 @@
         <module>blog-api</module>
         <module>blog-provider</module>
         <module>blog-consumer</module>
+        <module>blog-core</module>
     </modules>
 
     <parent>

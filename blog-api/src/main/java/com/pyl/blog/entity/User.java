@@ -7,6 +7,8 @@ public class User implements Serializable {
 
     private String userName;
 
+    private String password;
+
     private Integer userAge;
 
     private static final long serialVersionUID = 1L;
@@ -27,6 +29,14 @@ public class User implements Serializable {
         this.userName = userName == null ? null : userName.trim();
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public Integer getUserAge() {
         return userAge;
     }
@@ -43,6 +53,7 @@ public class User implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", userId=").append(userId);
         sb.append(", userName=").append(userName);
+        sb.append(", password=").append(password);
         sb.append(", userAge=").append(userAge);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
