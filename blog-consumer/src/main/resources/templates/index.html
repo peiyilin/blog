@@ -3,9 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <script src="../static/js/jquery-3.3.1.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
 </head>
 <body>
-hello world!
-eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MzMyMDY4NzcsInVzZXJuYW1lIjoicHlsIn0.ENcwZH_NSjNsJIyCjPVJ7p_NviND8KvzTagto5RIJEU
+    <div style="padding: 100px 100px 10px;">
+        <form class="bs-example bs-example-form" role="form">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary" url="http://localhost:8081/login">登录</button>
+                        <button type="button" class="btn btn-primary" url="http://localhost:8081/test">测试</button>
+                        <button type="button" class="btn btn-primary" url="http://localhost:8081/users/1/2">查询用户</button>
+                    </div><!-- /input-group -->
+                </div>
+            </div><!-- /.col-lg-6 -->
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <input id="token" type="hidden">
+                        <textarea id="result" class="form-control"></textarea>
+                    </div><!-- /input-group -->
+                </div>
+            </div>
+            <!-- /.row -->
+        </form>
+    </div>
+    <script >
+        $(function () {
+            $(".btn-primary").click(function () {
+                var url = $(this).attr("url");
+                if(url.indexOf("login") >= 0){
+                    $.ajax({
+                        url:url,
+                        type:"POST",
+                        data:{"name":"pyl","password":"pyl"},
+                        dataType:"json",
+                        success:function (data) {
+                            $("#token").val(data.data);
+                            $("#result").val(data.data);
+                        }
+                    });
+                }else if(url.indexOf("test")>=0){
+                    $.ajax({
+                        url:url,
+                        type:"GET",
+                        beforeSend: function(request) {
+                            request.setRequestHeader("token", $("#token").val());
+                        },
+                        dataType:"json",
+                        success:function (data) {
+                            $("#result").val(data.data);
+                        }
+                    });
+                }else {
+                    $.ajax({
+                        url:url,
+                        type:"GET",
+                        beforeSend: function(request) {
+                            request.setRequestHeader("token", $("#token").val());
+                        },
+                        dataType:"json",
+                        success:function (data) {
+                            $("#result").val(data.data);
+                        }
+                    });
+                }
+            })
+        })
+    </script>
 </body>
 </html>

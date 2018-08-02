@@ -34,6 +34,7 @@ public class JwtUtil {
             DecodedJWT jwt = verifier.verify(token);
             return true;
         } catch (Exception exception) {
+            exception.printStackTrace();
             return false;
         }
     }
