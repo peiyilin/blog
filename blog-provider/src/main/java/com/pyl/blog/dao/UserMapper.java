@@ -5,17 +5,19 @@ import com.pyl.blog.entity.User;
 import java.util.List;
 
 public interface UserMapper {
-    int deleteByPrimaryKey(Integer userId);
+    int deleteByPrimaryKey(Long id);
 
     int insert(User record);
 
     int insertSelective(User record);
 
-    User selectByPrimaryKey(Integer userId);
-
-    List<User> selectAll();
+    User selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+    List<User> selectAll();
+
+    User getUserByName(String username);
 }

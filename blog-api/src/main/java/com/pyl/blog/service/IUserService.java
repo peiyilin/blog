@@ -10,4 +10,6 @@ import java.util.List;
  **/
 public interface IUserService {
     List<User> getAll(int pageIndex,int pageSize);
+
+    User getUserByName(String username);
 }

@@ -19,6 +19,11 @@ public class UserSeviceImpl implements IUserService {
     private UserMapper userMapper;
 
     @Override
+    public User getUserByName(String username) {
+        return userMapper.getUserByName(username);
+    }
+
+    @Override
     public List<User> getAll(int pageIndex,int pageSize) {
         if (pageSize < 0 || pageSize==0){
             pageSize = 10;

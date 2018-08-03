@@ -46,10 +46,10 @@ public class MyRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         String username = JwtUtil.getUsername(principals.toString());
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-        //权限角色先不搞
-        /*User user = userService.getUserByName(username);*/
+        //角色及权限先不搞
+        User user = userService.getUserByName(username);
         simpleAuthorizationInfo.addRole("admin");
-        Set<String> permission = new HashSet<>(Arrays.asList(new String[]{"edit","delete"}));
+        Set<String> permission = new HashSet<>(Arrays.asList(new String[]{"edit","view"}));
         simpleAuthorizationInfo.addStringPermissions(permission);
         return simpleAuthorizationInfo;
     }
@@ -68,9 +68,7 @@ public class MyRealm extends AuthorizingRealm {
 
         /*UserBean userBean = userService.getUser(username);*/
         User user = new User();
-        user.setUserId(1);
-        user.setUserName("pyl");
-        user.setPassword("111");
+        user.setPassword("pyl");
         if (user == null) {
             throw new AuthenticationException("User didn't existed!");
         }

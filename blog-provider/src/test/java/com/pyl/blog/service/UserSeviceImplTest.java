@@ -23,6 +23,6 @@ public class UserSeviceImplTest extends BaseTestService{
     public void getAll() {
         PageHelper.startPage(1,2);
         List<User> users = userMapper.selectAll();
-        users.forEach(user -> System.out.println("姓名："+user.getUserName()+"|年龄："+user.getUserAge()));
+        users.forEach(user -> System.out.println("姓名："+user.getUserName()));
     }
 }
