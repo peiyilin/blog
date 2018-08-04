@@ -1,8 +1,13 @@
 package com.pyl.blog.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+/**
+ * @author peiyilin
+ */
+public class User implements Serializable {
+    private static final long serialVersionUID = 4530069512450118954L;
     private Long id;
 
     private String userName;

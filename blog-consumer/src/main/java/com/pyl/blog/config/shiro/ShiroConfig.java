@@ -1,6 +1,6 @@
-package com.pyl.blog.config;
+package com.pyl.blog.config.shiro;
 
-import filter.JwtFilter;
+import plugins.jwt.JwtFilter;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -11,7 +11,6 @@ import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreato
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
-import plugins.shiro.MyRealm;
 
 import javax.servlet.Filter;
 import java.util.HashMap;
@@ -24,9 +23,13 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
+    @Bean
+    public DubboService getDubboService(){
+        return new DubboService();
+    }
     @Bean(name = "myRealm")
     public MyRealm myAuthRealm() {
-        MyRealm myRealm = new MyRealm();
+        MyRealm myRealm = new MyRealm(getDubboService());
         return myRealm;
     }
 

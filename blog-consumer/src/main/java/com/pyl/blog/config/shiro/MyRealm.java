@@ -1,9 +1,7 @@
-package plugins.shiro;
+package com.pyl.blog.config.shiro;
 
-import com.alibaba.dubbo.config.annotation.Reference;
 import com.pyl.blog.entity.User;
-import com.pyl.blog.service.IUserService;
-import common.JwtUtil;
+import plugins.jwt.JwtUtil;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -15,6 +13,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import plugins.jwt.JwtToken;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -28,9 +27,12 @@ import java.util.Set;
 public class MyRealm extends AuthorizingRealm {
     private static final Logger LOGGER = LoggerFactory.getLogger(MyRealm.class);
 
-    @Reference(version = "1.0.0")
-    private IUserService userService;
+    private DubboService dubboService;
 
+    public MyRealm(){ }
+    public MyRealm(DubboService dubboService){
+        this.dubboService = dubboService;
+    }
     /**
      * 大坑！，必须重写此方法，不然Shiro会报错
      */
@@ -47,7 +49,7 @@ public class MyRealm extends AuthorizingRealm {
         String username = JwtUtil.getUsername(principals.toString());
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         //角色及权限先不搞
-        User user = userService.getUserByName(username);
+        User user = dubboService.userService.getUserByName(username);
         simpleAuthorizationInfo.addRole("admin");
         Set<String> permission = new HashSet<>(Arrays.asList(new String[]{"edit","view"}));
         simpleAuthorizationInfo.addStringPermissions(permission);

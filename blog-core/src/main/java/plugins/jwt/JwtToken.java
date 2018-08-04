@@ -1,4 +1,4 @@
-package plugins.shiro;
+package plugins.jwt;
 
 import org.apache.shiro.authc.AuthenticationToken;
 
