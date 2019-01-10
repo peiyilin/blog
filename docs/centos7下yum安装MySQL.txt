@@ -1,0 +1,41 @@
+Centos7安装MySQL
+
+1、配置yum源
+wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm
+2、安装MySQLyum源
+yum install mysql57-community-release-el7-8.noarch.rpm
+检查MySQLyum源是否安装成功
+yum repolist enabled | grep "mysql.*-community.*"
+
+可以修改/etc/yum.repos.d/mysql-community.repo改变默认安装的MySQL版本
+
+3、安装MySQL
+yum install mysql-community-server -y
+
+4、启动MySQL服务
+systemctl start mysqld.service
+
+5、开机启动
+systemctl enable mysqld.service
+systenctl daemon-reload
+
+6、修改root本地登录代码
+首先在/var/log/mysqld.log文件中查询默认生成的root密码
+grep 'temporary password' /var/log/mysqld.log
+
+mysql5,7
+show variables like '%password%';
+然后根据实际情况进行修改
+
+修改密码：alter USER 'root'@'localhost' identified by 'password';
+
+7、添加远程登录用户
+grant all privileges on *.* to 'test'@'%' identified by 'password';
+flush privileges;
+
+8、配置默认编码为utf-8
+修改/etc/my.cnf配置文件，在[mysqld]下添加编码配置
+
+[mysqld]
+character_set_server=utf8
+init_connect='SET NAMES utf8'
